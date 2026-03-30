@@ -2,6 +2,59 @@
 
 import { useState } from "react";
 
+// Logo mark — a stylized checkmark inside a square frame, suggesting approval/permit
+function ClearSignLogo({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-label="ClearSign"
+    >
+      {/* Outer frame — signage panel shape */}
+      <rect x="2" y="2" width="36" height="36" rx="6" stroke="#00E87B" strokeWidth="2.5" />
+      {/* Inner approval mark */}
+      <path
+        d="M11 20.5L17.5 27L29 13"
+        stroke="#00E87B"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+// Clean SVG icons — no emoji
+function IconMap() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <path d="M9 11a3 3 0 1 0 6 0 3 3 0 0 0-6 0z" />
+      <path d="M17.657 16.657 13.414 20.9a2 2 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
+    </svg>
+  );
+}
+
+function IconClock() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 6v6l4 2" />
+    </svg>
+  );
+}
+
+function IconLayers() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <path d="M12 2 2 7l10 5 10-5-10-5z" />
+      <path d="M2 17l10 5 10-5" />
+      <path d="M2 12l10 5 10-5" />
+    </svg>
+  );
+}
+
 export default function Home() {
   const [formData, setFormData] = useState({
     name: "",
@@ -21,12 +74,15 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#0A1628] text-white">
+
       {/* Nav */}
       <nav className="fixed top-0 w-full z-50 bg-[#0A1628]/90 backdrop-blur-sm border-b border-white/5">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-[#00E87B] font-bold text-xl tracking-tight">Clear</span>
-            <span className="text-white font-bold text-xl tracking-tight">Sign</span>
+          <div className="flex items-center gap-3">
+            <ClearSignLogo className="w-8 h-8" />
+            <span className="font-bold text-lg tracking-tight">
+              Clear<span className="text-[#00E87B]">Sign</span>
+            </span>
           </div>
           <a
             href="#contact"
@@ -49,7 +105,7 @@ export default function Home() {
             <span className="text-[#00E87B]">Slow Your Rollout</span>
           </h1>
           <p className="text-xl text-white/60 max-w-2xl mx-auto mb-10 text-balance">
-            ClearSign handles multi-jurisdiction signage permitting for franchise operators and sign companies. 
+            ClearSign handles multi-jurisdiction signage permitting for franchise operators and sign companies.
             Jurisdiction research, compliance checks, and ready-to-submit permit packets — delivered fast.
           </p>
           <a
@@ -77,17 +133,17 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                icon: "📍",
+                icon: <IconMap />,
                 title: "Different Rules Everywhere",
                 desc: "Height limits, setback requirements, illumination restrictions, overlay districts — every city is different and the codes aren't organized for you.",
               },
               {
-                icon: "⏳",
+                icon: <IconClock />,
                 title: "Permits Take Weeks",
                 desc: "A single review cycle takes 2–6 weeks. A rejection sends you back to the start. Opening timelines slip. Revenue is delayed.",
               },
               {
-                icon: "🔁",
+                icon: <IconLayers />,
                 title: "Manual & Repetitive",
                 desc: "Most teams pull codes by hand, build packets in Word, and track status in spreadsheets. It doesn't scale.",
               },
@@ -96,7 +152,9 @@ export default function Home() {
                 key={item.title}
                 className="bg-[#0A1628] border border-white/5 rounded-xl p-8"
               >
-                <div className="text-4xl mb-4">{item.icon}</div>
+                <div className="text-[#00E87B] mb-5 w-10 h-10 flex items-center justify-center bg-[#00E87B]/10 rounded-lg">
+                  {item.icon}
+                </div>
                 <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
                 <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
               </div>
@@ -134,14 +192,15 @@ export default function Home() {
                 desc: "A complete, ready-to-submit permit packet tailored to that jurisdiction. Forms filled, requirements met, nothing missing.",
               },
             ].map((item) => (
-              <div key={item.step} className="relative">
-                <div className="text-[#00E87B]/20 font-black text-6xl absolute -top-4 -left-2 select-none">
-                  {item.step}
+              <div key={item.step} className="bg-[#0D1F3C] border border-white/5 rounded-xl p-8">
+                <div className="flex items-center gap-4 mb-5">
+                  <span className="text-[#00E87B] font-black text-4xl leading-none opacity-40 select-none">
+                    {item.step}
+                  </span>
+                  <div className="h-px flex-1 bg-[#00E87B]/20" />
                 </div>
-                <div className="relative bg-[#0D1F3C] border border-white/5 rounded-xl p-8 pt-10">
-                  <h3 className="text-lg font-semibold mb-3 text-[#00E87B]">{item.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
-                </div>
+                <h3 className="text-lg font-semibold mb-3 text-white">{item.title}</h3>
+                <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -365,14 +424,15 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-10 px-6 border-t border-white/5">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-1">
-            <span className="text-[#00E87B] font-bold">Clear</span>
-            <span className="text-white font-bold">Sign</span>
-            <span className="text-white/30 text-sm ml-3">© 2026</span>
+          <div className="flex items-center gap-3">
+            <ClearSignLogo className="w-6 h-6" />
+            <span className="font-bold">Clear<span className="text-[#00E87B]">Sign</span></span>
+            <span className="text-white/30 text-sm ml-2">© 2026</span>
           </div>
           <p className="text-white/30 text-sm">We get your signs approved.</p>
         </div>
       </footer>
+
     </main>
   );
 }
