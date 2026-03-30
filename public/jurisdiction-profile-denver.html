@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Denver, CO — Sign Jurisdiction Profile | ClearSign</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: #1a1a2e; font-size: 14px; line-height: 1.6; }
+
+  /* Print */
+  @page { size: letter; margin: 0; }
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .no-break { break-inside: avoid; page-break-inside: avoid; }
+    .page-break { page-break-before: always; }
+    a::after { content: " (" attr(href) ")"; font-size: 0.72em; color: #666; }
+    .no-print-url a::after { content: none; }
+  }
+
+  /* Header */
+  .doc-header {
+    background: #0A1628;
+    padding: 28px 48px 0 48px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+  }
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .wordmark {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+  .wordmark span { color: #00E87B; }
+  .doc-type-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #00E87B;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .header-hero {
+    padding-bottom: 24px;
+  }
+  .city-name {
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+  .doc-subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+    letter-spacing: 0.3px;
+  }
+  .green-rule { height: 2px; background: #00E87B; margin: 0; }
+  .meta-bar {
+    background: #0D1F3C;
+    padding: 10px 48px;
+    display: flex;
+    gap: 32px;
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.45);
+  }
+  .meta-bar strong { color: rgba(255,255,255,0.75); font-weight: 600; }
+
+  /* Body */
+  .body { padding: 0 48px 48px 48px; }
+
+  /* Section headers */
+  .section { margin-top: 32px; }
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: #00E87B;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e8edf2;
+  }
+
+  /* Two-column layout */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* Authority block */
+  .authority-detail { font-size: 13.5px; color: #1a1a2e; }
+  .authority-detail p { margin-bottom: 6px; }
+  .authority-detail .label { font-weight: 600; color: #0A1628; min-width: 80px; display: inline-block; }
+  .authority-detail a { color: #1B3A6B; text-decoration: none; }
+  .portal-btn {
+    display: inline-block;
+    background: #00E87B;
+    color: #0A1628 !important;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-bottom: 12px;
+  }
+  .portal-btn::after { display: none !important; }
+  @media print { .portal-btn { background: #00E87B !important; } }
+  .link-item { margin-bottom: 8px; font-size: 13px; }
+  .link-item a { color: #1B3A6B; }
+  .link-label { font-weight: 600; display: block; color: #1a1a2e; margin-bottom: 2px; }
+
+  /* Callout box */
+  .callout {
+    background: #f0f5ff;
+    border-left: 4px solid #00E87B;
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+  }
+  .callout-title { font-weight: 700; font-size: 13.5px; color: #0A1628; margin-bottom: 10px; }
+  .callout ol { padding-left: 20px; }
+  .callout li { margin-bottom: 7px; font-size: 13.5px; color: #1a1a2e; }
+  .callout li strong { color: #0A1628; }
+  .callout .note { margin-top: 10px; font-size: 12px; color: #4a5568; font-style: italic; }
+
+  /* Dimension cards */
+  .dim-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .dim-card .dim-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #4a5568; margin-bottom: 4px; }
+  .dim-card .dim-value { font-size: 16px; font-weight: 700; color: #0A1628; }
+  .dim-card .dim-note { font-size: 11.5px; color: #4a5568; margin-top: 3px; }
+
+  /* Illumination columns */
+  .illum-col { border-radius: 8px; padding: 16px; }
+  .illum-allowed { background: #f0fdf4; border: 1px solid #86efac; }
+  .illum-denied { background: #fff5f5; border: 1px solid #fca5a5; }
+  .illum-col .col-title { font-weight: 700; font-size: 13px; margin-bottom: 10px; }
+  .illum-allowed .col-title { color: #166534; }
+  .illum-denied .col-title { color: #991b1b; }
+  .illum-item { font-size: 13.5px; padding: 4px 0; border-bottom: 1px solid rgba(0,0,0,0.06); color: #1a1a2e; }
+  .illum-item:last-child { border-bottom: none; }
+
+  /* Overlay warning */
+  .overlay-box {
+    background: #fffbeb;
+    border: 1px solid #fbbf24;
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .overlay-box .warn-title { font-weight: 700; font-size: 13.5px; color: #92400e; margin-bottom: 10px; }
+  .overlay-list { list-style: none; padding: 0; }
+  .overlay-list li { font-size: 13.5px; padding: 4px 0; color: #1a1a2e; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .overlay-list li:last-child { border-bottom: none; }
+  .overlay-note { margin-top: 10px; font-size: 12px; color: #78350f; font-style: italic; }
+
+  /* Checklist */
+  .checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
+  .check-item { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; font-size: 13.5px; border-bottom: 1px solid #f0f4f8; }
+  .check-item:last-child { border-bottom: none; }
+  .check-box { width: 16px; height: 16px; border: 2px solid #cbd5e1; border-radius: 3px; flex-shrink: 0; margin-top: 2px; }
+  .check-num { font-weight: 700; color: #00E87B; font-size: 12px; min-width: 18px; margin-top: 1px; }
+  .check-label { color: #1a1a2e; }
+  .check-note { font-size: 11.5px; color: #4a5568; }
+
+  /* Timeline & Fees cards */
+  .info-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .info-card-header {
+    background: #0A1628;
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.8px;
+    padding: 10px 16px;
+    text-transform: uppercase;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .info-card-body { padding: 14px 16px; }
+  .info-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #f0f4f8; font-size: 13.5px; }
+  .info-row:last-child { border-bottom: none; }
+  .info-key { color: #4a5568; }
+  .info-val { font-weight: 600; color: #0A1628; }
+  .info-val.green { color: #00a855; }
+  .info-val.warn { color: #d97706; }
+
+  /* Code ref table */
+  .code-table-wrap { background: #f8fafc; border-radius: 8px; padding: 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #4a5568; padding: 0 12px 8px 0; }
+  td { padding: 7px 12px 7px 0; border-top: 1px solid #e2e8f0; color: #1a1a2e; vertical-align: top; }
+  td:first-child { font-weight: 600; color: #0A1628; white-space: nowrap; }
+
+  /* Footer */
+  .doc-footer {
+    background: #0A1628;
+    padding: 12px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .footer-left { display: flex; align-items: center; gap: 16px; }
+  .footer-contact { font-size: 11.5px; color: rgba(255,255,255,0.5); }
+  .footer-contact a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  .footer-right { font-size: 11px; color: rgba(255,255,255,0.3); text-align: right; }
+  .footer-disclaimer { font-size: 10.5px; color: rgba(255,255,255,0.3); margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="header-top">
+    <div class="logo-row no-print-url">
+      <svg viewBox="0 0 40 46" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:37px">
+        <defs>
+          <clipPath id="sl"><rect x="0" y="0" width="20" height="46"/></clipPath>
+          <clipPath id="sr"><rect x="20" y="0" width="20" height="46"/></clipPath>
+        </defs>
+        <path d="M20 2L4 9V23c0 9 7 16.5 16 19 9-2.5 16-10 16-19V9L20 2z" fill="#0A1628" clip-path="url(#sl)"/>
+        <path d="M20 2L4 9V23c0 9 7 16.5 16 19 9-2.5 16-10 16-19V9L20 2z" fill="#1B3A6B" clip-path="url(#sr)"/>
+        <path d="M20 2L4 9V23c0 9 7 16.5 16 19 9-2.5 16-10 16-19V9L20 2z" stroke="#00E87B" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M11 23l6 6 12-14" stroke="#00E87B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="wordmark">Clear<span>Sign</span></div>
+    </div>
+    <div class="doc-type-label">Jurisdiction Profile</div>
+  </div>
+  <div class="header-hero">
+    <div class="city-name">Denver, CO</div>
+    <div class="doc-subtitle">Sign Permit Intelligence Report</div>
+  </div>
+</div>
+<div class="green-rule"></div>
+<div class="meta-bar">
+  <div><strong>Prepared for:</strong> [CLIENT NAME]</div>
+  <div><strong>Prepared by:</strong> ClearSign Permit Services</div>
+  <div><strong>Date:</strong> March 30, 2026</div>
+  <div><strong>Location:</strong> Denver, CO — General Commercial</div>
+</div>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- Section 1: Governing Authority -->
+  <div class="section no-break">
+    <div class="section-title">01 — Governing Authority</div>
+    <div class="two-col">
+      <div class="authority-detail">
+        <p><span class="label">Department</span> Community Planning &amp; Development (CPD)</p>
+        <p><span class="label">AHJ</span> Denver Building Department / Zoning Administration</p>
+        <p><span class="label">Address</span> 201 W. Colfax Ave, Dept. 205<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Denver, CO 80202</p>
+        <p><span class="label">Phone</span> 311 or (720) 913-1311</p>
+        <p><span class="label">Website</span> <a href="https://www.denvergov.org/Government/Departments/Community-Planning-and-Development">denvergov.org/cpd</a></p>
+      </div>
+      <div class="no-print-url">
+        <a class="portal-btn" href="https://www.denvergov.org/AccelaCitizenAccess/Default.aspx">→ Open E-Permits Portal</a>
+        <div class="link-item">
+          <span class="link-label">Sign Permit Application (PDF)</span>
+          <a href="https://www.denvergov.org/files/assets/public/v/3/community-planning-and-development/documents/ds/commercial-zoning/sign_application.pdf">Download official application form</a>
+        </div>
+        <div class="link-item">
+          <span class="link-label">Site Plan Example (PDF)</span>
+          <a href="https://www.denvergov.org/files/assets/public/v/1/community-planning-and-development/documents/ds/commercial-zoning/sign-site-plan-example.pdf">Download site plan template</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Permit Requirements -->
+  <div class="section no-break">
+    <div class="section-title">02 — Permit Requirements</div>
+    <div class="callout">
+      <div class="callout-title">⚠️ Three separate permits are required for illuminated signs</div>
+      <ol>
+        <li><strong>Zoning Permit</strong> — Verifies sign complies with Denver Zoning Code. Apply via e-permits → select "Building Log" for simultaneous review.</li>
+        <li><strong>Building Permit</strong> — Required for structural attachment. Structural plans must be <strong>prepared, stamped, and signed by a Colorado-registered professional structural engineer.</strong></li>
+        <li><strong>Electrical Permit</strong> — Required for all signs with electrical components. Apply separately via e-permits → Quick Permits track.</li>
+      </ol>
+      <div class="note">New business tenants: if prior tenant was a different use type, additional zoning use permit documentation is required. Confirm with CPD before submitting.</div>
+    </div>
+  </div>
+
+  <!-- Section 3: Dimensional Rules -->
+  <div class="section no-break">
+    <div class="section-title">03 — Key Dimensional Rules</div>
+    <div class="three-col">
+      <div class="dim-card">
+        <div class="dim-label">Max Sign Area</div>
+        <div class="dim-value">1.5 sq ft / LF</div>
+        <div class="dim-note">Of building frontage, up to 200 sq ft max. Verify exact cap for your zone district (C-MX zones may vary).</div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-label">Max Projection</div>
+        <div class="dim-value">12 inches</div>
+        <div class="dim-note">From building face. Includes raceway + letter depth combined.</div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-label">Max Height</div>
+        <div class="dim-value">Roofline / Parapet</div>
+        <div class="dim-note">Sign top cannot exceed roofline or parapet. Measure to top of letters, not raceway bottom.</div>
+      </div>
+      <div class="dim-card" style="grid-column: span 1">
+        <div class="dim-label">Signs Per Frontage</div>
+        <div class="dim-value">1 Primary</div>
+        <div class="dim-note">One wall sign per street frontage typical. Secondary ID/logo signs may be exempt — confirm with CPD.</div>
+      </div>
+      <div class="dim-card" style="grid-column: span 2">
+        <div class="dim-label">Relevant Code</div>
+        <div class="dim-value" style="font-size:13px">DZC Article 10</div>
+        <div class="dim-note">§10.10 (general) · §10.10.3 (permitted types by zone) · §10.10.4 (measurement) · §10.10.5 (illumination) · §10.10.6 (permits &amp; enforcement)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: Illumination -->
+  <div class="section no-break">
+    <div class="section-title">04 — Illumination Rules</div>
+    <div class="two-col">
+      <div class="illum-col illum-allowed">
+        <div class="col-title">✅ Permitted</div>
+        <div class="illum-item">LED channel letters (front-lit / face-illuminated)</div>
+        <div class="illum-item">Externally illuminated signs (shielded light source)</div>
+        <div class="illum-item">Neon signs</div>
+        <div class="illum-item">EMC / electronic message centers (min. 8-second hold; brightness limits apply)</div>
+      </div>
+      <div class="illum-col illum-denied">
+        <div class="col-title">❌ Not Permitted</div>
+        <div class="illum-item">Animated or flashing illumination</div>
+        <div class="illum-item">EMC with rapid cycling (&lt; 8-second hold)</div>
+        <div class="illum-item">Unshielded external light sources directed off-property</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5: Overlay Districts -->
+  <div class="section no-break">
+    <div class="section-title">05 — Overlay Districts to Verify</div>
+    <div class="overlay-box">
+      <div class="warn-title">⚠️ These neighborhoods have design review boards — additional approval required</div>
+      <ul class="overlay-list">
+        <li>LoDo (Lower Downtown Historic District)</li>
+        <li>Baker Historic District</li>
+        <li>Curtis Park / Five Points</li>
+        <li>Ballpark Neighborhood</li>
+        <li>Golden Triangle Creative District</li>
+      </ul>
+      <div class="overlay-note">Colfax Ave (east of downtown) is primarily C-MX zone and typically NOT in a historic overlay — but always confirm against the specific parcel using Denver's zoning map before submitting. If in an overlay, Landmark Preservation must issue a Certificate of Appropriateness before the sign permit is processed.</div>
+    </div>
+  </div>
+
+  <!-- Section 6: Documents Checklist -->
+  <div class="section no-break">
+    <div class="section-title">06 — Required Documents Checklist</div>
+    <div class="checklist-grid">
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-num">1</span></div>
+        <div><div class="check-label">Sign permit application (CPD form)</div><div class="check-note">Download PDF from portal before applying</div></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-num">2</span></div>
+        <div><div class="check-label">Site plan</div><div class="check-note">Must show zone lot frontage, tenant frontage, north arrow, scale</div></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-num">3</span></div>
+        <div><div class="check-label">Dimensioned sign elevation drawings</div><div class="check-note">One per sign; show height from grade, projection, all dimensions</div></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-num">4</span></div>
+        <div><div class="check-label">Building elevation</div><div class="check-note">Shows sign placement relative to parapet/roofline</div></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-num">5</span></div>
+        <div><div class="check-label">Sign spec sheet</div><div class="check-note">Materials, colors, illumination type, UL listing numbers</div></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-num">6</span></div>
+        <div><div class="check-label">Electrical permit application</div><div class="check-note">Apply separately via Quick Permits track</div></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-num">7</span></div>
+        <div><div class="check-label">Structural attachment details</div><div class="check-note"><strong>Must be PE-stamped</strong> by CO-licensed structural engineer</div></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-num">8</span></div>
+        <div><div class="check-label">Owner/landlord authorization letter</div><div class="check-note">Signed, on property owner letterhead</div></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-num">9</span></div>
+        <div><div class="check-label">Denver-licensed sign contractor info</div><div class="check-note">Name, license number, certificate of insurance</div></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-num">10</span></div>
+        <div><div class="check-label">Photos of existing conditions</div><div class="check-note">All building elevations, entry, existing signage</div></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-num">11</span></div>
+        <div><div class="check-label">Design review application</div><div class="check-note">Only if parcel is within an overlay district</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 7: Timeline & Fees -->
+  <div class="section no-break">
+    <div class="section-title">07 — Timeline &amp; Fees</div>
+    <div class="two-col">
+      <div class="info-card">
+        <div class="info-card-header">Review Timeline</div>
+        <div class="info-card-body">
+          <div class="info-row"><span class="info-key">Standard review</span><span class="info-val green">2–4 weeks</span></div>
+          <div class="info-row"><span class="info-key">With design review overlay</span><span class="info-val warn">+2–6 weeks</span></div>
+          <div class="info-row"><span class="info-key">Expedited review</span><span class="info-val">Available (confirm fee)</span></div>
+          <div class="info-row"><span class="info-key">Building permit window</span><span class="info-val">180 days after zoning permit</span></div>
+          <div class="info-row"><span class="info-key">Response to corrections</span><span class="info-val">180 days before expiry</span></div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-header">Fee Estimates</div>
+        <div class="info-card-body">
+          <div class="info-row"><span class="info-key">Sign permit</span><span class="info-val">~$150–$300</span></div>
+          <div class="info-row"><span class="info-key">Electrical permit</span><span class="info-val">~$100–$200</span></div>
+          <div class="info-row"><span class="info-key">Total estimated</span><span class="info-val green">$250–$500</span></div>
+          <div class="info-row"><span class="info-key">Design review fee</span><span class="info-val warn">Additional (if overlay)</span></div>
+          <div class="info-row"><span class="info-key">Current schedule</span><span class="info-val">Confirm at denvergov.org</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 8: Code Reference -->
+  <div class="section no-break">
+    <div class="section-title">08 — Relevant Code Sections</div>
+    <div class="code-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Section</th>
+            <th>Title</th>
+            <th>What It Covers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>DZC § 10.10</td><td>Sign Regulations — General</td><td>Scope, definitions, applicability of sign rules across all zone districts</td></tr>
+          <tr><td>DZC § 10.10.3</td><td>Permitted Sign Types by Zone</td><td>Which sign types are allowed in each zone district (C-MX, MS, etc.)</td></tr>
+          <tr><td>DZC § 10.10.4</td><td>Sign Measurement Standards</td><td>How to calculate sign area, height, projection — the math Denver uses</td></tr>
+          <tr><td>DZC § 10.10.5</td><td>General Sign Standards</td><td>Illumination requirements, materials, prohibited sign types</td></tr>
+          <tr><td>DZC § 10.10.6</td><td>Sign Permits &amp; Enforcement</td><td>Application requirements, permit process, inspections, violations</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:12px; font-size:12px; color:#4a5568;">Full code text: <a href="https://library.municode.com/co/denver">library.municode.com/co/denver</a></p>
+    </div>
+  </div>
+
+</div><!-- /body -->
+
+<!-- FOOTER -->
+<div class="doc-footer no-print-url">
+  <div class="footer-left">
+    <svg viewBox="0 0 40 46" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:23px">
+      <defs>
+        <clipPath id="fl"><rect x="0" y="0" width="20" height="46"/></clipPath>
+        <clipPath id="fr"><rect x="20" y="0" width="20" height="46"/></clipPath>
+      </defs>
+      <path d="M20 2L4 9V23c0 9 7 16.5 16 19 9-2.5 16-10 16-19V9L20 2z" fill="#0A1628" clip-path="url(#fl)"/>
+      <path d="M20 2L4 9V23c0 9 7 16.5 16 19 9-2.5 16-10 16-19V9L20 2z" fill="#1B3A6B" clip-path="url(#fr)"/>
+      <path d="M20 2L4 9V23c0 9 7 16.5 16 19 9-2.5 16-10 16-19V9L20 2z" stroke="#00E87B" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M11 23l6 6 12-14" stroke="#00E87B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="footer-contact">
+      <a href="mailto:hello@clearsign.io">hello@clearsign.io</a> &nbsp;·&nbsp; clearsign.io
+    </div>
+  </div>
+  <div class="footer-right">
+    <div>ClearSign Permit Services</div>
+    <div class="footer-disclaimer">Based on Denver CPD official sources, March 2026. Verify open items before submission.</div>
+  </div>
+</div>
+
+</body>
+</html>
