@@ -2,33 +2,11 @@
 
 import { useState } from "react";
 
-// Logo mark — shield with an energetic lightning-check
-function ClearSignLogo({ className = "", dark = false }: { className?: string; dark?: boolean }) {
-  const stroke = dark ? "#0A1628" : "#00E87B";
+function ClearSignLogo({ className = "" }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 40 44"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      aria-label="ClearSign"
-    >
-      {/* Shield body */}
-      <path
-        d="M20 2L4 8.5V22c0 8.5 6.8 15.8 16 18 9.2-2.2 16-9.5 16-18V8.5L20 2z"
-        stroke={stroke}
-        strokeWidth="2.5"
-        strokeLinejoin="round"
-        fill={dark ? "#00E87B" : "none"}
-      />
-      {/* Energetic lightning-check — sharp angles, dynamic feel */}
-      <path
-        d="M13 21l5 5 10-12"
-        stroke={dark ? "#0A1628" : "#00E87B"}
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <svg viewBox="0 0 40 46" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-label="ClearSign">
+      <path d="M20 2L4 9V23c0 9 7 16.5 16 19 9-2.5 16-10 16-19V9L20 2z" stroke="#00E87B" strokeWidth="2.5" strokeLinejoin="round"/>
+      <path d="M11 23l6 6 12-14" stroke="#00E87B" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
 }
@@ -108,12 +86,14 @@ export default function Home() {
             <span className="text-[#00E87B] text-sm font-medium">Agent-Powered Signage Permitting</span>
           </div>
           <h1 className="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-balance">
-            Stop Letting Sign Permits{" "}
-            <span className="text-[#00E87B]">Slow Your Rollout</span>
+            Sign Permits.{" "}
+            <span className="text-[#00E87B]">Done.</span>
           </h1>
-          <p className="text-xl text-white/60 max-w-2xl mx-auto mb-10 text-balance">
-            ClearSign handles multi-jurisdiction signage permitting for franchise operators and sign companies.
-            Jurisdiction research, compliance checks, and ready-to-submit permit packets — delivered fast.
+          <p className="text-xl text-white/60 max-w-2xl mx-auto mb-4 text-balance">
+            Other tools tell you the rules. ClearSign handles the permit — jurisdiction research, compliance checks, and ready-to-submit packets, delivered fast.
+          </p>
+          <p className="text-base text-white/40 max-w-xl mx-auto mb-10">
+            Not a lookup tool. A permit service. We do the work.
           </p>
           <a
             href="#contact"
@@ -215,7 +195,7 @@ export default function Home() {
       </section>
 
       {/* Who It's For */}
-      <section className="py-24 px-6 bg-[#0D1F3C]">
+      <section className="py-24 px-6 bg-[#071A0E]">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -245,7 +225,7 @@ export default function Home() {
             ].map((item) => (
               <div
                 key={item.title}
-                className="bg-[#0A1628] border border-white/5 rounded-xl p-8 flex flex-col"
+                className="bg-[#0A1F0F] border border-white/5 rounded-xl p-8 flex flex-col"
               >
                 <span className="inline-block bg-[#00E87B]/10 text-[#00E87B] text-xs font-semibold px-3 py-1 rounded-full mb-4 self-start">
                   {item.tag}
@@ -267,6 +247,9 @@ export default function Home() {
             </h2>
             <p className="text-white/50 text-lg max-w-xl mx-auto">
               No retainers required. Start with one location.
+            </p>
+            <p className="text-[#00E87B]/70 text-sm max-w-xl mx-auto mt-2">
+              Complete permit packages — not just code lookups.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
