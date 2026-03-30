@@ -2,22 +2,29 @@
 
 import { useState } from "react";
 
-// Logo mark — a stylized checkmark inside a square frame, suggesting approval/permit
-function ClearSignLogo({ className = "" }: { className?: string }) {
+// Logo mark — shield with an energetic lightning-check
+function ClearSignLogo({ className = "", dark = false }: { className?: string; dark?: boolean }) {
+  const stroke = dark ? "#0A1628" : "#00E87B";
   return (
     <svg
-      viewBox="0 0 40 40"
+      viewBox="0 0 40 44"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       aria-label="ClearSign"
     >
-      {/* Outer frame — signage panel shape */}
-      <rect x="2" y="2" width="36" height="36" rx="6" stroke="#00E87B" strokeWidth="2.5" />
-      {/* Inner approval mark */}
+      {/* Shield body */}
       <path
-        d="M11 20.5L17.5 27L29 13"
-        stroke="#00E87B"
+        d="M20 2L4 8.5V22c0 8.5 6.8 15.8 16 18 9.2-2.2 16-9.5 16-18V8.5L20 2z"
+        stroke={stroke}
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+        fill={dark ? "#00E87B" : "none"}
+      />
+      {/* Energetic lightning-check — sharp angles, dynamic feel */}
+      <path
+        d="M13 21l5 5 10-12"
+        stroke={dark ? "#0A1628" : "#00E87B"}
         strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -118,15 +125,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Problem */}
-      <section className="py-24 px-6 bg-[#0D1F3C]">
+      {/* Problem — white section to break up the dark/dark alternation */}
+      <section className="py-24 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#0A1628]">
               Signage Permitting Is a{" "}
-              <span className="text-[#00E87B]">Broken Process</span>
+              <span className="text-[#00C96A]">Broken Process</span>
             </h2>
-            <p className="text-white/50 text-lg max-w-2xl mx-auto">
+            <p className="text-[#0A1628]/50 text-lg max-w-2xl mx-auto">
               Every jurisdiction has different rules. Most franchise teams handle this manually, one city at a time.
             </p>
           </div>
@@ -150,13 +157,13 @@ export default function Home() {
             ].map((item) => (
               <div
                 key={item.title}
-                className="bg-[#0A1628] border border-white/5 rounded-xl p-8"
+                className="bg-[#F4F6F9] border border-[#0A1628]/5 rounded-xl p-8"
               >
-                <div className="text-[#00E87B] mb-5 w-10 h-10 flex items-center justify-center bg-[#00E87B]/10 rounded-lg">
+                <div className="text-[#00C96A] mb-5 w-10 h-10 flex items-center justify-center bg-[#00E87B]/10 rounded-lg">
                   {item.icon}
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
+                <h3 className="text-lg font-semibold mb-2 text-[#0A1628]">{item.title}</h3>
+                <p className="text-[#0A1628]/50 text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -429,6 +436,7 @@ export default function Home() {
             <span className="font-bold">Clear<span className="text-[#00E87B]">Sign</span></span>
             <span className="text-white/30 text-sm ml-2">© 2026</span>
           </div>
+
           <p className="text-white/30 text-sm">We get your signs approved.</p>
         </div>
       </footer>
