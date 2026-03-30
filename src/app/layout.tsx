@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   title: "ClearSign — Agent-Powered Signage Permitting",
   description:
     "ClearSign handles multi-jurisdiction signage permitting for franchise operators and sign companies. Jurisdiction research, compliance checks, and permit packets — delivered fast.",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

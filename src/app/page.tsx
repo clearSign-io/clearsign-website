@@ -5,7 +5,17 @@ import { useState } from "react";
 function ClearSignLogo({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 40 46" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-label="ClearSign">
-      <path d="M20 2L4 9V23c0 9 7 16.5 16 19 9-2.5 16-10 16-19V9L20 2z" fill="#1B3A6B" stroke="#00E87B" strokeWidth="2.5" strokeLinejoin="round"/>
+      <defs>
+        <clipPath id="shield-left"><rect x="0" y="0" width="20" height="46"/></clipPath>
+        <clipPath id="shield-right"><rect x="20" y="0" width="20" height="46"/></clipPath>
+      </defs>
+      {/* Left half — dark */}
+      <path d="M20 2L4 9V23c0 9 7 16.5 16 19 9-2.5 16-10 16-19V9L20 2z" fill="#0A1628" clipPath="url(#shield-left)"/>
+      {/* Right half — lighter blue */}
+      <path d="M20 2L4 9V23c0 9 7 16.5 16 19 9-2.5 16-10 16-19V9L20 2z" fill="#1B3A6B" clipPath="url(#shield-right)"/>
+      {/* Outline */}
+      <path d="M20 2L4 9V23c0 9 7 16.5 16 19 9-2.5 16-10 16-19V9L20 2z" stroke="#00E87B" strokeWidth="2.5" strokeLinejoin="round"/>
+      {/* Check */}
       <path d="M11 23l6 6 12-14" stroke="#00E87B" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
