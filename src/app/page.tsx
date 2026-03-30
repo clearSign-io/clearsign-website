@@ -5,7 +5,7 @@ import { useState } from "react";
 function ClearSignLogo({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 40 46" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-label="ClearSign">
-      <path d="M20 2L4 9V23c0 9 7 16.5 16 19 9-2.5 16-10 16-19V9L20 2z" stroke="#00E87B" strokeWidth="2.5" strokeLinejoin="round"/>
+      <path d="M20 2L4 9V23c0 9 7 16.5 16 19 9-2.5 16-10 16-19V9L20 2z" fill="#1B3A6B" stroke="#00E87B" strokeWidth="2.5" strokeLinejoin="round"/>
       <path d="M11 23l6 6 12-14" stroke="#00E87B" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
@@ -63,7 +63,7 @@ export default function Home() {
       {/* Nav */}
       <nav className="fixed top-0 w-full z-50 bg-[#0A1628]/90 backdrop-blur-sm border-b border-white/5">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5">
             <ClearSignLogo className="w-8 h-8" />
             <span className="font-bold text-lg tracking-tight">
               Clear<span className="text-[#00E87B]">Sign</span>
