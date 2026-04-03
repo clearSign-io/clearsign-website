@@ -121,7 +121,7 @@ export default function Home() {
             <span className="text-[#00E87B]">Done.</span>
           </h1>
           <p className="text-xl text-white/60 max-w-2xl mx-auto mb-4 text-balance">
-            Other tools tell you the rules. ClearSign handles the permit — jurisdiction research, compliance checks, and ready-to-submit packets, delivered fast.
+            Other tools tell you the rules. We handle the permit.
           </p>
           <p className="text-base text-white/40 max-w-xl mx-auto mb-10">
             Powered by AI agents, not contractors.
