@@ -104,6 +104,10 @@ export default function Home() {
               <span className="text-[#00E87B]/60 text-[9px] font-medium tracking-wide uppercase">Agent-Powered Signage Permitting</span>
             </div>
           </div>
+          <div className="hidden md:flex items-center gap-6">
+            <a href="#how-it-works" className="text-white/50 hover:text-white text-sm transition-colors">How It Works</a>
+            <a href="#pricing" className="text-white/50 hover:text-white text-sm transition-colors">Pricing</a>
+          </div>
           <a
             href="#contact"
             className="bg-[#00E87B] text-[#0A1628] font-semibold text-sm px-5 py-2 rounded hover:bg-[#00C96A] transition-colors"
@@ -182,7 +186,7 @@ export default function Home() {
       </section>
 
       {/* Solution */}
-      <section className="py-24 px-6">
+      <section className="py-24 px-6" id="how-it-works">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -533,7 +537,7 @@ export default function Home() {
                   {isSubmitting ? "Sending…" : "Request Free Permit Package →"}
                 </button>
                 <p className="text-center text-white/30 text-sm">
-                  No sales call. No contract. We&apos;ll follow up within 1 business day.
+                  No sales call. No contract. We&apos;ll follow up shortly.
                 </p>
               </form>
             </>
