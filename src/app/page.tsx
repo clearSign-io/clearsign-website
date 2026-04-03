@@ -57,14 +57,36 @@ export default function Home() {
     email: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent("ClearSign — Free Permit Package Request");
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nCompany: ${formData.company}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    );
-    window.location.href = `mailto:hello@clearsign.io?subject=${subject}&body=${body}`;
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setErrorMessage(data.error || "Something went wrong. Please try again.");
+        setSubmitStatus("error");
+      } else {
+        setSubmitStatus("success");
+        setFormData({ name: "", company: "", email: "", message: "" });
+      }
+    } catch {
+      setErrorMessage("Network error. Please check your connection and try again.");
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -75,9 +97,12 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <ClearSignLogo className="w-8 h-8" />
-            <span className="font-bold text-lg tracking-tight">
-              Clear<span className="text-[#00E87B]">Sign</span>
-            </span>
+            <div className="flex flex-col leading-tight">
+              <span className="font-bold text-lg tracking-tight">
+                Clear<span className="text-[#00E87B]">Sign</span>
+              </span>
+              <span className="text-[#00E87B]/60 text-[9px] font-medium tracking-wide uppercase">Agent-Powered Signage Permitting</span>
+            </div>
           </div>
           <a
             href="#contact"
@@ -91,10 +116,6 @@ export default function Home() {
       {/* Hero */}
       <section className="pt-32 pb-24 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-[#00E87B]/10 border border-[#00E87B]/20 rounded-full px-4 py-1.5 mb-8">
-            <span className="w-2 h-2 rounded-full bg-[#00E87B] animate-pulse" />
-            <span className="text-[#00E87B] text-sm font-medium">Agent-Powered Signage Permitting</span>
-          </div>
           <h1 className="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-balance">
             Sign Permits.{" "}
             <span className="text-[#00E87B]">Done.</span>
@@ -103,7 +124,7 @@ export default function Home() {
             Other tools tell you the rules. ClearSign handles the permit — jurisdiction research, compliance checks, and ready-to-submit packets, delivered fast.
           </p>
           <p className="text-base text-white/40 max-w-xl mx-auto mb-10">
-            Not a lookup tool. A permit service. We do the work.
+            Powered by AI agents, not contractors.
           </p>
           <a
             href="#contact"
@@ -204,6 +225,66 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Sample Output */}
+      <section className="py-24 px-6 bg-[#0D1F3C]">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              See What You <span className="text-[#00E87B]">Actually Get</span>
+            </h2>
+            <p className="text-white/50 text-lg max-w-xl mx-auto">
+              Every permit package includes a full jurisdiction profile. Here&apos;s a real one — Denver, CO.
+            </p>
+          </div>
+          <div className="rounded-xl overflow-hidden border border-white/10 shadow-2xl">
+            {/* Mock document header */}
+            <div className="bg-[#0A1628] px-8 py-6 flex items-center justify-between border-b border-white/10">
+              <div>
+                <p className="text-[#00E87B] text-xs font-semibold tracking-widest uppercase mb-1">Jurisdiction Profile</p>
+                <p className="text-white text-2xl font-extrabold tracking-tight">Denver, CO</p>
+                <p className="text-white/40 text-sm mt-0.5">Denver Community Planning and Development · Zoning Code Art. 10, §10.10.3</p>
+              </div>
+              <a
+                href="/api/permit-profile"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#00E87B] text-[#0A1628] font-bold text-sm px-5 py-2.5 rounded-lg hover:bg-[#00C96A] transition-colors whitespace-nowrap"
+              >
+                View Full Profile →
+              </a>
+            </div>
+            {/* Mock data rows */}
+            <div className="bg-[#071422] divide-y divide-white/5">
+              {[
+                { label: "Max Sign Height", value: "At roofline / parapet height", note: "No fixed ft limit — cannot exceed roofline or parapet; verify by zone", status: "warn" },
+                { label: "Max Sign Area", value: "200 sq ft (primary frontage)", note: "1.5 sq ft per LF of frontage — 40 LF frontage = 60 sq ft", status: "clear" },
+                { label: "Illumination", value: "Allowed — static only, no animation", note: null, status: "note" },
+                { label: "Setback from ROW", value: "Verify by zone", note: null, status: "warn" },
+                { label: "Overlay District", value: "Downtown Design Review required", note: null, status: "warn" },
+                { label: "Review Timeline", value: "15–30 business days (estimated)", note: null, status: "warn" },
+              ].map((row) => (
+                <div key={row.label} className="flex items-start justify-between px-8 py-3.5">
+                  <span className="text-white/50 text-sm">{row.label}</span>
+                  <div className="flex items-start gap-3 text-right max-w-xs">
+                    <div>
+                      <span className="text-white text-sm font-medium">{row.value}</span>
+                      {row.note && <p className="text-white/30 text-xs mt-0.5 leading-snug">{row.note}</p>}
+                    </div>
+                    <span className={`w-2 h-2 rounded-full shrink-0 mt-1 ${
+                      row.status === "clear" ? "bg-[#00E87B]" :
+                      row.status === "warn" ? "bg-amber-400" : "bg-white/30"
+                    }`} />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="bg-[#071422] px-8 py-4 border-t border-white/5">
+              <p className="text-white/25 text-xs">Sample only — full profile includes compliance check, fee schedule, required forms, and submission instructions.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Who It's For */}
       <section className="py-24 px-6 bg-[#071A0E]">
         <div className="max-w-6xl mx-auto">
@@ -213,6 +294,9 @@ export default function Home() {
             </h2>
             <p className="text-white/50 text-lg max-w-2xl mx-auto">
               If sign permits are part of your job, ClearSign was built for you.
+            </p>
+            <p className="text-white/30 text-sm max-w-xl mx-auto mt-3">
+              We&apos;ve profiled jurisdictions across 14 states — Denver, Austin, Phoenix, Nashville, Atlanta, and more.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
@@ -353,84 +437,122 @@ export default function Home() {
       {/* Contact */}
       <section className="py-24 px-6 bg-[#0D1F3C]" id="contact">
         <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Get a <span className="text-[#00E87B]">Free Permit Package</span>
-            </h2>
-            <p className="text-white/50 text-lg">
-              Tell us about a location where you need a permit. We&apos;ll run it through our system and deliver a complete package — no strings attached.
-            </p>
-          </div>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm text-white/50 mb-1.5">Name</label>
-                <input
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full bg-[#0A1628] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00E87B]/50 transition-colors"
-                  placeholder="Your name"
-                />
+          {submitStatus === "success" ? (
+            <div className="text-center py-12">
+              <div className="flex justify-center mb-6">
+                <svg viewBox="0 0 40 46" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-24 h-28">
+                  <defs>
+                    <clipPath id="success-shield-left"><rect x="0" y="0" width="20" height="46"/></clipPath>
+                    <clipPath id="success-shield-right"><rect x="20" y="0" width="20" height="46"/></clipPath>
+                    <style>{`@keyframes draw-check { to { stroke-dashoffset: 0; } }`}</style>
+                  </defs>
+                  <path d="M20 2L4 9V23c0 9 7 16.5 16 19 9-2.5 16-10 16-19V9L20 2z" fill="#0A1628" clipPath="url(#success-shield-left)"/>
+                  <path d="M20 2L4 9V23c0 9 7 16.5 16 19 9-2.5 16-10 16-19V9L20 2z" fill="#1B3A6B" clipPath="url(#success-shield-right)"/>
+                  <path d="M20 2L4 9V23c0 9 7 16.5 16 19 9-2.5 16-10 16-19V9L20 2z" stroke="#00E87B" strokeWidth="2.5" strokeLinejoin="round"/>
+                  <path d="M11 23l6 6 12-14" stroke="#00E87B" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="30" strokeDashoffset="30" style={{animation: "draw-check 0.4s ease 0.3s forwards"}}/>
+                </svg>
               </div>
-              <div>
-                <label className="block text-sm text-white/50 mb-1.5">Company</label>
-                <input
-                  type="text"
-                  required
-                  value={formData.company}
-                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  className="w-full bg-[#0A1628] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00E87B]/50 transition-colors"
-                  placeholder="Your company"
-                />
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                We&apos;re on it.
+              </h2>
+              <p className="text-white/60 text-lg max-w-md mx-auto leading-relaxed">
+                Request received. Expect our intake form in your inbox shortly.
+              </p>
+              <button
+                onClick={() => setSubmitStatus(null)}
+                className="mt-10 border border-white/20 text-white/60 hover:text-white hover:border-white/40 font-medium px-6 py-2.5 rounded-lg transition-colors text-sm"
+              >
+                Submit another request
+              </button>
+            </div>
+          ) : (
+            <>
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  Get a <span className="text-[#00E87B]">Free Permit Package</span>
+                </h2>
+                <p className="text-white/50 text-lg">
+                  Tell us about a location where you need a permit. We&apos;ll run it through our system and deliver a complete package — no strings attached.
+                </p>
               </div>
-            </div>
-            <div>
-              <label className="block text-sm text-white/50 mb-1.5">Email</label>
-              <input
-                type="email"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full bg-[#0A1628] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00E87B]/50 transition-colors"
-                placeholder="you@company.com"
-              />
-            </div>
-            <div>
-              <label className="block text-sm text-white/50 mb-1.5">Tell us about your project</label>
-              <textarea
-                required
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                rows={5}
-                className="w-full bg-[#0A1628] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00E87B]/50 transition-colors resize-none"
-                placeholder="How many locations? What type of signage? Any specific cities or states?"
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-[#00E87B] text-[#0A1628] font-bold py-4 rounded-lg hover:bg-[#00C96A] transition-colors text-lg"
-            >
-              Request Free Permit Package →
-            </button>
-            <p className="text-center text-white/30 text-sm">
-              No sales call. No contract. We&apos;ll follow up within 1 business day.
-            </p>
-          </form>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm text-white/50 mb-1.5">Name</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full bg-[#0A1628] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00E87B]/50 transition-colors"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-white/50 mb-1.5">Company</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.company}
+                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                      className="w-full bg-[#0A1628] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00E87B]/50 transition-colors"
+                      placeholder="Your company"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm text-white/50 mb-1.5">Email</label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full bg-[#0A1628] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00E87B]/50 transition-colors"
+                    placeholder="you@company.com"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-white/50 mb-1.5">Tell us about your project</label>
+                  <textarea
+                    required
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    rows={5}
+                    className="w-full bg-[#0A1628] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00E87B]/50 transition-colors resize-none"
+                    placeholder="How many locations? What type of signage? Any specific cities or states?"
+                  />
+                </div>
+                {submitStatus === "error" && (
+                  <p className="text-red-400 text-sm text-center">{errorMessage}</p>
+                )}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#00E87B] text-[#0A1628] font-bold py-4 rounded-lg hover:bg-[#00C96A] transition-colors text-lg disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? "Sending…" : "Request Free Permit Package →"}
+                </button>
+                <p className="text-center text-white/30 text-sm">
+                  No sales call. No contract. We&apos;ll follow up within 1 business day.
+                </p>
+              </form>
+            </>
+          )}
         </div>
       </section>
 
       {/* Footer */}
       <footer className="py-10 px-6 border-t border-white/5">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <ClearSignLogo className="w-6 h-6" />
-            <span className="font-bold">Clear<span className="text-[#00E87B]">Sign</span></span>
-            <span className="text-white/30 text-sm ml-2">© 2026</span>
+            <div className="flex flex-col leading-tight">
+              <span className="font-bold">Clear<span className="text-[#00E87B]">Sign</span></span>
+              <span className="text-[#00E87B]/60 text-[8px] font-medium tracking-wide uppercase">Agent-Powered Signage Permitting</span>
+            </div>
           </div>
 
-          <p className="text-white/30 text-sm">We get your signs approved.</p>
+          <p className="text-white/30 text-sm">We get your signs approved. © 2026</p>
         </div>
       </footer>
 
